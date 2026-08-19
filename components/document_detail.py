@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.helpers import clean_value
+from components.references import render_document_references
 from services.document_service import (
     get_document_detail,
     get_document_pages
@@ -107,3 +108,4 @@ def render_document_detail():
         page.get("page_text") or "",
         height=500
     )
+    render_document_references(selected_document_id)
