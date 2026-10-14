@@ -188,7 +188,7 @@ review_status_filter = filters["review_status"]
 visibility_filter = filters["visibility"]
 
 #demo toggle
-public_demo_mode = st.sidebar.toggle("Public Demo Mode", value=True)
+public_demo_mode = False #st.sidebar.toggle("Public Demo Mode", value=True)
 
 # ----------------------------
 # MAIN SEARCH
