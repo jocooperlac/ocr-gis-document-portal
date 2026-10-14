@@ -232,12 +232,14 @@ if not results:
     st.stop()
 
 
-if not public_demo_mode: 
-    render_results_table(results)
+# Interactive results table
+render_results_table(results)
 
+# Selected document details
 render_document_detail()
 
+# Expandable search results
 render_search_results(
     results,
-    public_demo_mode=public_demo_mode
+    public_demo_mode=False
 )
