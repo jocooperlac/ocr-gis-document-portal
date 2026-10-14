@@ -23,7 +23,6 @@ def render_metrics(results, city_count=None):
     with col3:
         st.metric("Cities in filter list", city_count if city_count is not None else "—")
 
-
 def render_results_table(results):
     df = pd.DataFrame(results)
 
@@ -46,12 +45,29 @@ def render_results_table(results):
         if col in df.columns
     ]
 
-    st.dataframe(
+    # Interactive table with row selection
+    event = st.dataframe(
         df[existing_columns],
         width="stretch",
-        hide_index=True
+        hide_index=True,
+        on_select="rerun",
+        selection_mode="single-row",
+        key="search_results_table"
     )
 
+    selected_rows = event.selection.rows
+
+    if selected_rows:
+        selected_index = selected_rows[0]
+
+        selected_row = df.iloc[selected_index]
+
+        document_id = selected_row.get("document_id")
+        page_number = selected_row.get("page_number")
+
+        # Store selected document and page
+        st.session_state["selected_document_id"] = document_id
+        st.session_state["selected_page_number"] = page_number
 
 def render_search_results(results, public_demo_mode=False):
     st.divider()
